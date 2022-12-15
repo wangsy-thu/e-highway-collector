@@ -2,6 +2,7 @@ package main
 
 import (
 	"e-highway-collector/config"
+	"e-highway-collector/core/handler"
 	"e-highway-collector/lib/logger"
 	"e-highway-collector/tcp"
 	"fmt"
@@ -38,7 +39,7 @@ func main() {
 		&tcp.Config{
 			Address: fmt.Sprintf("%s:%d", config.Properties.Bind, config.Properties.Port),
 		},
-		tcp.MakeEchoHandler())
+		handler.MakeSensorHandler())
 
 	if err != nil {
 		logger.Error(err)

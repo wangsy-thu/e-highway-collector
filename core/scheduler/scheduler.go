@@ -1,4 +1,4 @@
-package tcp
+package scheduler
 
 import (
 	flux2 "e-highway-collector/flux"

@@ -3,6 +3,7 @@ package tcp
 import (
 	"context"
 	"e-highway-collector/config"
+	"e-highway-collector/core/scheduler"
 	"e-highway-collector/flux"
 	"e-highway-collector/interface/tcp"
 	"e-highway-collector/lib/logger"
@@ -68,7 +69,7 @@ func ListenAndServe(
 		config.Properties.InfluxOrg,
 		config.Properties.InfluxBucket)
 
-	scheduler := MakeConcurrentScheduler(
+	concurrentScheduler := scheduler.MakeConcurrentScheduler(
 		ch,
 		config.Properties.WorkerNum,
 		flux.Worker,
@@ -78,7 +79,7 @@ func ListenAndServe(
 		},
 		influxWriter)
 
-	go scheduler.Run()
+	go concurrentScheduler.Run()
 
 	// 网络层主循环，向通信管道中写入
 	for {

@@ -1,5 +1,7 @@
 package flux
 
+import "e-highway-collector/flux"
+
 type LineWriter interface {
-	Write(bytes []byte)
+	Write(bytes flux.Line)
 }
