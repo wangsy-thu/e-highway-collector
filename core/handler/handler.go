@@ -3,7 +3,6 @@ package handler
 import (
 	"bufio"
 	"context"
-	"e-highway-collector/core/reply"
 	"e-highway-collector/flux"
 	"e-highway-collector/lib/logger"
 	"e-highway-collector/lib/sync/atomic"
@@ -56,8 +55,8 @@ func (handler *SensorHandler) Handle(_ context.Context, conn net.Conn, ch chan f
 		// 正在向客户端发送数据，任务量 + 1
 		client.Waiting.Add(1)
 		b := []byte(msg)
-		parser.ParseLine(b, ch)
-		_, _ = conn.Write(reply.MakeOkReply().ToBytes())
+		r := parser.ParseLine(b, ch)
+		_, _ = conn.Write(r.ToBytes())
 		client.Waiting.Done()
 	}
 }

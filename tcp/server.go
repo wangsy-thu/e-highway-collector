@@ -4,9 +4,11 @@ import (
 	"context"
 	"e-highway-collector/config"
 	"e-highway-collector/core/scheduler"
+	"e-highway-collector/core/worker"
 	"e-highway-collector/flux"
 	"e-highway-collector/interface/tcp"
 	"e-highway-collector/lib/logger"
+	"e-highway-collector/sink"
 	"net"
 	"os"
 	"os/signal"
@@ -69,15 +71,20 @@ func ListenAndServe(
 		config.Properties.InfluxOrg,
 		config.Properties.InfluxBucket)
 
+	rabbitMQSink := sink.MakeRabbitMQSink(
+		config.Properties.RabbitMQQueueName,
+		config.Properties.RabbitMQUrl)
+
 	concurrentScheduler := scheduler.MakeConcurrentScheduler(
 		ch,
 		config.Properties.WorkerNum,
-		flux.Worker,
+		worker.Worker,
 		func(currentWorker, workerCount int) int {
 			currentWorker++
 			return currentWorker % workerCount
 		},
-		influxWriter)
+		influxWriter,
+		rabbitMQSink)
 
 	go concurrentScheduler.Run()
 

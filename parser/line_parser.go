@@ -5,7 +5,6 @@ import (
 	"e-highway-collector/flux"
 	"e-highway-collector/interface/reply"
 	"e-highway-collector/lib/logger"
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -15,7 +14,6 @@ import (
 // Example: *FLUX$testM,gateId=1,tag1=flux speed=134,plate=A36435 1671021217\n
 func ParseLine(msg []byte, lineCh chan flux.Line) reply.Reply {
 	l := string(msg[6 : len(msg)-2])
-	logger.Info("receive line: " + l)
 	// 1,按空格切分字符串
 	strArr := strings.Split(l, " ")
 	if len(strArr) > 3 || len(strArr) < 2 {
@@ -26,7 +24,6 @@ func ParseLine(msg []byte, lineCh chan flux.Line) reply.Reply {
 	var err error
 	if len(strArr) == 3 {
 		ts, err = strconv.Atoi(strArr[2])
-		fmt.Println(ts)
 		if err != nil {
 			logger.Error("protocol")
 			return reply2.MakeErrReply("protocol error\n")

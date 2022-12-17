@@ -2,7 +2,10 @@ module e-highway-collector
 
 go 1.17
 
-require github.com/influxdata/influxdb-client-go/v2 v2.12.1
+require (
+	github.com/influxdata/influxdb-client-go/v2 v2.12.1
+	github.com/streadway/amqp v1.0.0
+)
 
 require (
 	github.com/deepmap/oapi-codegen v1.8.2 // indirect

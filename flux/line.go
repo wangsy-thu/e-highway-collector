@@ -1,8 +1,8 @@
 package flux
 
 type Line struct {
-	Measurement string
-	Tags        map[string]string
-	Fields      map[string]interface{}
-	Timestamp   int
+	Measurement string                 `json:"measurement"`
+	Tags        map[string]string      `json:"tags"`
+	Fields      map[string]interface{} `json:"Fields"`
+	Timestamp   int                    `json:"timestamp"`
 }

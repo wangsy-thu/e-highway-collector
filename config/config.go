@@ -12,18 +12,20 @@ import (
 
 // ServerProperties defines global config properties
 type ServerProperties struct {
-	Bind           string `cfg:"bind"`
-	Port           int    `cfg:"port"`
-	AppendOnly     bool   `cfg:"appendOnly"`
-	AppendFilename string `cfg:"appendFilename"`
-	MaxClients     int    `cfg:"maxclients"`
-	RequirePass    string `cfg:"requirepass"`
-	Databases      int    `cfg:"databases"`
-	WorkerNum      int    `cfg:"workers"`
-	InfluxToken    string `cfg:"influx-token"`
-	InfluxUrl      string `cfg:"influx-url"`
-	InfluxOrg      string `cfg:"influx-org"`
-	InfluxBucket   string `cfg:"influx-bucket"`
+	Bind              string `cfg:"bind"`
+	Port              int    `cfg:"port"`
+	AppendOnly        bool   `cfg:"appendOnly"`
+	AppendFilename    string `cfg:"appendFilename"`
+	MaxClients        int    `cfg:"maxclients"`
+	RequirePass       string `cfg:"requirepass"`
+	Databases         int    `cfg:"databases"`
+	WorkerNum         int    `cfg:"workers"`
+	InfluxToken       string `cfg:"influx-token"`
+	InfluxUrl         string `cfg:"influx-url"`
+	InfluxOrg         string `cfg:"influx-org"`
+	InfluxBucket      string `cfg:"influx-bucket"`
+	RabbitMQUrl       string `cfg:"rabbitmq-url"`
+	RabbitMQQueueName string `cfg:"rabbitmq-queue-name"`
 
 	Peers []string `cfg:"peers"`
 	Self  string   `cfg:"self"`
